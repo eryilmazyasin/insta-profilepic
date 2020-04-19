@@ -1,26 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import User from './User';
 import './App.css';
+import axios from 'axios';
 
-function App() {
+ function App() {
+  const [value, setValue] = useState('');
+  const [instagram, setInstagram] = useState('');
+
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios.get(
+     `https://www.instagram.com/${value}/?__a=1&fbclid=IwAR3B5_HaB65jOlr_ixE6C0g_7DdUo0BspGxVsQYULAn1vhXHWqogeDsC5GU`
+    )
+    .then((result) => {
+      setInstagram(result.data.graphql.user)
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+     <div className="form-wrapper">
+        <form  className="form-class" onSubmit={handleSubmit}>
+          <input type="text" value={value} onChange={handleChange} className="text-input" placeholder="Instagram kişisi"/>
+          <input type="submit" value="Görüntüle" className="buttonsubmit" />
+        </form>
+      </div>
+      <User instagram={instagram}></User>
+
     </div>
   );
 }
 
 export default App;
+
+
+
+
