@@ -29,12 +29,16 @@ import axios from 'axios';
     <div className="app">
      <div className="form-wrapper">
         <form  className="form-class" onSubmit={handleSubmit}>
-          <input type="text" value={value} onChange={handleChange} className="text-input" placeholder="Instagram kişisi"/>
+          <input type="text" value={value} onChange={handleChange} className="text-input" placeholder="Instagram kullanıcı adı"/>
           <input type="submit" value="Görüntüle" className="buttonsubmit" />
         </form>
       </div>
       <User instagram={instagram}></User>
 
+      <div className="footer">
+        Yasin Eryılmaz
+        <a href="https://github.com/eryilmazyasin" target="_blank">Github</a>
+      </div>
     </div>
   );
 }
